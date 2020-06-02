@@ -33,6 +33,7 @@ namespace Commander
         {
 
             string CommanderConnection = Configuration.GetConnectionString("CommanderConnection");
+
             services.AddDbContext<CommanderContext>(opt => {
                 opt.UseSqlServer(CommanderConnection);
                 });
@@ -43,7 +44,9 @@ namespace Commander
             
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
+            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
+
+            //services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
 
             //ADDED AFTER TUTORIAL
             services.AddSwaggerGen(c=> {
